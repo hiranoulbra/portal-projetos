@@ -5,18 +5,9 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { PrimaryButton } from "@/components/ui/buttons";
 
 import Pagination from "@/components/pagination";
-import { SearchParamsProjectType, getProjects } from "@/actions/project.actions";
+import { SearchParamsProjectType } from "@/actions/project.actions";
 import { deleteUser, getUsers } from "@/actions/users.actions";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/authOptions";
-import { ROLE } from "@/types/role";
-import { AccessDenied } from "@/components/access-denied";
 
-interface IClient {
-    client: string;
-    contact: string;
-    phone: string;
-}
 
 const columns =
     [
