@@ -1,5 +1,4 @@
 'use client';
-import { signal, useSignal } from "@preact/signals-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Column } from "./table.types";
 import { useCallback, useEffect, useState } from "react";
@@ -26,7 +25,7 @@ export const ColHeader = ({ column }: Props) => {
     const [order, setOrder] = useState('');
     useEffect(() => {
         setOrder(getSort(searchParams.get('sort') || '', column.name));
-    }, [searchParams])
+    }, [column.name,searchParams])
 
 
 

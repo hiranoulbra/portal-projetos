@@ -3,7 +3,7 @@
 import { FormEvent } from "react";
 import { LoginForm } from "../components/form-login";
 
-export default () => {
+const LoginPage = () => {
 
     /*const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -17,3 +17,4 @@ export default () => {
     }*/
     return (<LoginForm />)
 }
+export default LoginPage;

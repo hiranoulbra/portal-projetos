@@ -23,7 +23,7 @@ const Pagination = ({ totalPages }: Props) => {
         if (page > 0 && page <= totalPages) {
             setCurrentPage(page);
         }
-    }, [searchParams])
+    }, [totalPages,searchParams])
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);

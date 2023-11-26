@@ -1,5 +1,6 @@
 'use client';
 
+import { Logo } from "@/utils/icons/Logo";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -36,7 +37,7 @@ const LoginForm = () => {
         <form onSubmit={handleLogin} className="p-10 border rounded-lg  w-96 bg-white">
            
             <div className="flex w-full justify-center mb-10">
-                <img className="w-32" src="/logo.svg" />
+                <Logo className="w-32 text-cyan-900" />                
             </div>
             <h1 className="text-3xl font-bold mb-4">Login</h1>
             <p className="text-sm text-slate-700 mb-6">Faça login para continuar.</p>
