@@ -5,7 +5,7 @@ import { Panel } from "@/components/ui/panel";
 import { FilterIcon } from "@/utils/icons/filter.icon"
 import { FieldText } from "@/components/fields/field.text";
 import { FieldSelect } from "@/components/fields/field.select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon from "@/utils/icons/close.icons";
 import { useSearchParams, useRouter } from "next/navigation";
 import { DateRange, FieldDateRange } from "@/components/fields/field.date-range";
@@ -22,18 +22,18 @@ export const Filter: React.FC<{}> = () => {
     const [hasfilter, setHasfilter] = useState(false);
     const [show, setShow] = useState(false);
     const router = useRouter();
-    const params = useSearchParams();
+    const searchParams = useSearchParams();
 
     const onClear = () => {
         router.push('/projects');
         setShow(false);
     }
 
-    React.useEffect(() => {
-        const q = params.get('q');
-        const sd = params.get('sd');
-        const ed = params.get('ed');
-        const s = params.get('s');
+    useEffect(() => {
+        const q = searchParams.get('q');
+        const sd = searchParams.get('sd');
+        const ed = searchParams.get('ed');
+        const s = searchParams.get('s');
         if (q) {
             setProject(q);
         }
@@ -61,7 +61,7 @@ export const Filter: React.FC<{}> = () => {
             setHasfilter(false);
         }
 
-    }, [params])
+    }, [searchParams])
 
 
     const onApply = () => {
