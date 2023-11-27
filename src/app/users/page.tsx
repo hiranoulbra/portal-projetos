@@ -55,7 +55,6 @@ export default async function PrivatePage({ searchParams }: Props) {
                         {{
                             title: "Excluir Usuário",
                             text: "Deseja realmente excluir este usuário?",
-                            action: deleteUser
                         }} />
                     <Pagination totalPages={pages} />
 

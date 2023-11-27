@@ -58,14 +58,14 @@ export default async function PrivatePage({ searchParams }: Props) {
                     </div>
                 </div>
                 <main className="text-left w-full">
-                    <Table className="bg-white shadow-md p-2" columns={columns} items={items}
+                    <Table isUser={false} className="bg-white shadow-md p-2" columns={columns} items={items}
                         editUrl="/projects/edit"
                         viewUrl="/projects/view"
                         deleteForm=
                         {{
                             title: "Excluir Projeto",
                             text: "Deseja realmente excluir este projeto?",
-                            action: deleteProject
+                           
                         }} />
                     <Pagination totalPages={pages} />
 

@@ -22,9 +22,9 @@ type Props = {
     deleteForm: {
         title: string,
         text: string
-        action: DeleteActionType;
+    
     }
-    isUser?: boolean;
+    isUser: boolean;
 
 }
 export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl, isUser }: Props) => {
@@ -47,7 +47,7 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
                             {isUser && <LockForm id={item.id} isLocked={item.isLocked} />}
                             <Link href={`${viewUrl}/${item.id}`} className="text-cyan-600"><ViewIcon /></Link>
                             {item.canEdit && <Link href={`${editUrl}?id=${item.id}`} className="text-cyan-900"><EditIcon /></Link>}
-                            {item.canDelete && <DeleteForm id={item.id} {...deleteForm} />}
+                            {item.canDelete && <DeleteForm  id={item.id} {...deleteForm} isUser={isUser}/>}
 
                         </td>
                     </tr>
