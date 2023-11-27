@@ -6,9 +6,7 @@ import { ColHeader } from "./col-header"
 import EditIcon from "@/utils/icons/edit.icon"
 import ViewIcon from "@/utils/icons/view.icons"
 import { DeleteForm } from "@/app/projects/components/delete.form"
-
-//import { LockActionType } from "@/types/lock-action.type"
-//import { LockForm } from "../lock.form"
+import { LockForm } from "../lock.form"
 import Link from "next/link"
 
 
@@ -22,7 +20,7 @@ type Props = {
     deleteForm: {
         title: string,
         text: string
-    
+
     }
     isUser: boolean;
 
@@ -33,7 +31,7 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
             <thead>
                 <tr className="border-b border-gray-200">
                     {columns.map((column) => (
-                        <ColHeader key={`${isUser?'user':'project'}-${column.name}`} column={column} />
+                        <ColHeader key={`${isUser ? 'user' : 'project'}-${column.name}`} column={column} />
 
                     ))}
                     <th></th>
@@ -42,12 +40,12 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
             <tbody>
                 {items.map((item, index) => (
                     <tr className="odd:bg-gray-100" key={index}>
-                        {columns.map((column, indexC) => (<Cell key={`${isUser?'user':'project'}-cell-${index}-${indexC}`} column={column} item={item} />))}
+                        {columns.map((column, indexC) => (<Cell key={`${isUser ? 'user' : 'project'}-cell-${index}-${indexC}`} column={column} item={item} />))}
                         <td className="flex justify-end g ap-2 p-4">
-                            
+                            {isUser && <LockForm id={item.id} isLocked={item.isLocked} />}
                             <Link href={`${viewUrl}/${item.id}`} className="text-cyan-600"><ViewIcon /></Link>
                             {item.canEdit && <Link href={`${editUrl}?id=${item.id}`} className="text-cyan-900"><EditIcon /></Link>}
-                            {item.canDelete && <DeleteForm  id={item.id} {...deleteForm} isUser={isUser}/>}
+                            {item.canDelete && <DeleteForm id={item.id} {...deleteForm} isUser={isUser} />}
 
                         </td>
                     </tr>
@@ -56,4 +54,4 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
         </table>
     )
 }
-//{isUser && <LockForm id={item.id} isLocked={item.isLocked} />}
+//
