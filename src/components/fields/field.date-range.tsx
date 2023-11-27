@@ -1,3 +1,4 @@
+'use client';
 import { FieldText } from "./field.text"
 
 export type DateRange = {

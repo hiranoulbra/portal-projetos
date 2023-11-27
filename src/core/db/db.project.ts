@@ -77,15 +77,15 @@ export const getItemByIdAndUser = async (id: number, userId: number, isAdmin: bo
 
     let request = pool.request();
     const queryText = createQuery(request,
-        ` SELECT id, title, description,manager_id, start_date, end_date,planned, executed,status
+        ` SELECT id, title, description,manager_id, start_date, end_date,planned, executed,status,budget
         FROM dbo.projects`)
         .add('id = @id', 'id', id, sql.Int)
         .add('manager_id = @userId', 'userId', isAdmin ? null : userId, sql.Int)
         .build();
 
-  
+
     const result = await request.query(queryText);
-   
+
     if (result.recordset.length === 0) {
         return null;
     }
@@ -97,13 +97,13 @@ export const getItemById = async (id: number): Promise<ProjectType | null> => {
 
     let request = pool.request();
     const queryText = createQuery(request,
-        `SELECT p.id, p.title, p.description,p.manager_id, p.start_date, p.end_date,p.planned, p.executed, u.name as manager_name,p.status
+        `SELECT p.id, p.title, p.description,p.manager_id, p.start_date, p.end_date,p.planned, p.executed, u.name as manager_name,p.status,p.budget
         FROM dbo.projects as p
         LEFT JOIN dbo.users as u ON u.id = p.manager_id`)
-        .add('p.id = @id', 'id', id, sql.Int)       
-        .build();  
+        .add('p.id = @id', 'id', id, sql.Int)
+        .build();
     const result = await request.query(queryText);
-   
+
     if (result.recordset.length === 0) {
         return null;
     }
@@ -115,7 +115,7 @@ export const getItemsByYear = async (year: number): Promise<ProjectType[]> => {
 
     let request = pool.request();
     const queryText = createQuery(request,
-        `SELECT DISTINCT start_date,status
+        `SELECT DISTINCT start_date,status,budget
             FROM dbo.projects`)
         .add('YEAR(start_date) = @year', 'year', year, sql.Int)
         .build();

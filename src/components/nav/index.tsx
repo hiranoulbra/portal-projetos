@@ -28,11 +28,15 @@ const Nav = async () => {
         navItems.push({
             name: 'Usuários',
             href: '/users',
-        }, {
+        })
+    }
+    if (session?.user?.role === ROLE.ADMIN || session?.user?.role === ROLE.MANAGER) {
+        navItems.push({
             name: 'Relatórios',
             href: '/reports',
         })
     }
+    
     return <NavProvider>
         <NavBar user={user.name ?? ''}>
             {navItems.map((item, index) => {

@@ -37,6 +37,7 @@ const Info = ({ project, managers,isManager }: Props) => {
         <FieldText defaultValue={formatDate(project?.end_date)} name="end_date" required type="date" label={"Data Final"} groupProps={groupProps} />
         <FieldText defaultValue={project?.planned} name="planned" min={0} max={100} type="number" label={"Previsto"} groupProps={groupProps} />
         <FieldText defaultValue={project?.executed} name="executed" min={0} max={100} type="number" label={"Executado"} groupProps={groupProps} />
+        <FieldText groupProps={{ className: "w-full" }} defaultValue={project?.budget} type="number" required={true} name="budget" label={"Orçamento"} className="w-full" />
     </div>
 }
 export default Info;

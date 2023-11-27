@@ -16,4 +16,5 @@ export type ProjectType = {
     members_id: number[];
     archives: ArchiveType[];
     members: User[];
+    budget: number;
 } & PermissionItemType;

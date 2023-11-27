@@ -117,11 +117,14 @@ export const getViewProject = async (id: number): Promise<ProjectType | null> =>
         if (project == null) {
             return null;
         }
-       project.members = await getProjectMembers(id);
+        project.members = await getProjectMembers(id);
         const userIds = project.members.map((member: any) => member.user_id);
         userIds.push(project.manager_id);
         if (userIds.indexOf(session?.user.id) == -1 && session?.user.role != ROLE.ADMIN) {
             return null;
+        }
+        if (session?.user.role === ROLE.USER) {
+            project.budget = 0;
         }
         project.archives = await getArchiveByProject(id);
     } catch (error) {
@@ -165,6 +168,7 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
             start_date: z.coerce.date(),
             end_date: z.coerce.date(),
             planned: z.coerce.number().int().min(0).max(100),
+            budget: z.coerce.number().min(0),
             executed: z.coerce.number().int().min(0).max(100),
             members_id: z.array(z.coerce.number().int()).optional(),
             archives_id: z.array(z.coerce.number().int()).optional(),
@@ -184,6 +188,7 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
             executed: formdata.get('executed'),
             members_id: formdata.getAll('members_id'),
             archives_id: formdata.getAll('archives_id'),
+            budget: formdata.get('budget'),
             status: formdata.get('status')
         });
 
@@ -199,9 +204,10 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
                 .input('planned', sql.Int, data.planned)
                 .input('executed', sql.Int, data.executed)
                 .input('status', sql.VarChar, data.status)
+                .input('budget', sql.Decimal, data.budget)
                 .query(`
             UPDATE dbo.projects
-            SET title = @title, description = @description, manager_id = @manager_id, start_date = @start_date, end_date = @end_date, planned = @planned, executed = @executed , status = @status
+            SET title = @title, description = @description, manager_id = @manager_id, start_date = @start_date, end_date = @end_date, planned = @planned, executed = @executed , status = @status, budget = @budget
             WHERE id = @id
         `);
 
@@ -215,10 +221,11 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
                 .input('planned', sql.Int, data.planned)
                 .input('executed', sql.Int, data.executed)
                 .input('status', sql.VarChar, data.status)
+                .input('budget', sql.VarChar, data.budget)
                 .query(`
-                    INSERT INTO dbo.projects (title, description, manager_id, start_date, end_date, planned, executed)
+                    INSERT INTO dbo.projects (title, description, manager_id, start_date, end_date, planned, executed,budget)
                     OUTPUT INSERTED.id
-                    VALUES (@title, @description, @manager_id, @start_date, @end_date, @planned, @executed)
+                    VALUES (@title, @description, @manager_id, @start_date, @end_date, @planned, @executed,@budget)
                 `);
 
             data.id = result.recordset[0].id;
@@ -251,8 +258,6 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
         if (files.length > 0) {
             await uploadFiles(files, data.id);
         }
-
-
 
         return { message: 'success' };
     } catch (error) {

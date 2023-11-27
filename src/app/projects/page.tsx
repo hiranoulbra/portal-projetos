@@ -6,6 +6,9 @@ import { PrimaryButton } from "@/components/ui/buttons";
 import { Filter } from "./components/filter";
 import Pagination from "@/components/pagination";
 import { SearchParamsProjectType, deleteProject, getProjects } from "@/actions/project.actions";
+import { authOptions } from "@/utils/authOptions";
+import { getServerSession } from "next-auth";
+import { ROLE } from "@/types/role";
 
 
 const columns =
@@ -39,7 +42,7 @@ type Props = {
 }
 const columnsNames = columns.map(column => column.name);
 export default async function PrivatePage({ searchParams }: Props) {
-
+    const session = await getServerSession(authOptions);
     const { items, pages } = await getProjects(searchParams);
     return (
         <>
@@ -50,7 +53,7 @@ export default async function PrivatePage({ searchParams }: Props) {
                 <div className="flex w-full justify-between mt-4 mb-4 items-center">
                     <h2 className="text-2xl">Projetos</h2>
                     <div className="flex gap-3 items-center">
-                        <PrimaryButton href="/projects/edit" >Novo projeto</PrimaryButton>
+                        {(session?.user.role === ROLE.ADMIN || session?.user.role === ROLE.MANAGER) && <PrimaryButton href="/projects/edit" >Novo projeto</PrimaryButton>}
                         <Filter />
                     </div>
                 </div>

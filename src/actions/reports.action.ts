@@ -29,7 +29,6 @@ export const getReportStatus = async (year: number) => {
         }
     })
     return datasets;
-
 }
 
 export const getReportRiskByYear = async (year: number) => {
@@ -58,4 +57,29 @@ export const getReportRiskByYear = async (year: number) => {
 export const getYears = async () => {
     const result = await getProjectYears();
     return result;
+}
+
+export const getReportStatusBudget = async (year: number) => {
+
+    const projects = await getItemsByYear(year);
+
+
+    const datasets: DataSetType[] = [];
+
+    projects.map((project) => {
+        const month = dayjs(project.start_date).month()
+        const index = datasets.findIndex((dataset) => dataset.label === project.status);
+        if (index >= 0) {
+            datasets[index].data[month] += project.budget;
+        } else {
+            const item = {
+                label: project.status,
+                data: Array.from({ length: 12 }, () => 0),
+                backgroundColor: getColorByStatus(project.status)
+            }
+            item.data[month] +=project.budget;
+            datasets.push(item)
+        }
+    })
+    return datasets;
 }
