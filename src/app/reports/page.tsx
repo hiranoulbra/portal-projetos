@@ -41,7 +41,7 @@ export default async function ReportPage({ searchParams }: Props) {
                 </div>
                 <StatusProject title="Projetos por Status" data={reportStatusItems} />
                 <StatusProject title="Projetos por Risco" description="O grafico abaixo lista os risco de projetos em andamento" data={reportRiskItems} />
-                <StatusProject title="Projetos por Budget" description="O grafico abaixo lista o acumulado de orçamento de projetos por status pelo mes de cadastro" data={reportBugdetItems} />
+                <StatusProject title="Projetos por Orçamento" description="O grafico abaixo lista o acumulado de orçamento de projetos por status pelo mes de cadastro" data={reportBugdetItems} />
             </div>
         </>);
 }
