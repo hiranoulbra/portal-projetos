@@ -29,7 +29,7 @@ type Props = {
     searchParams: SearchParamsProjectType;
 }
 const columnsNames = columns.map(column => column.name);
-export default async function PrivatePage({ searchParams }: Props) {
+export default async function UserPages({ searchParams }: Props) {
  
 
     const { items, pages } = await getUsers(searchParams);

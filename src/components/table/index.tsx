@@ -33,7 +33,7 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
             <thead>
                 <tr className="border-b border-gray-200">
                     {columns.map((column) => (
-                        <ColHeader key={column.name} column={column} />
+                        <ColHeader key={`${isUser?'user':'project'}-${column.name}`} column={column} />
 
                     ))}
                     <th></th>
@@ -42,7 +42,7 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
             <tbody>
                 {items.map((item, index) => (
                     <tr className="odd:bg-gray-100" key={index}>
-                        {columns.map((column, indexC) => (<Cell key={`$cell-${index}-${indexC}`} column={column} item={item} />))}
+                        {columns.map((column, indexC) => (<Cell key={`${isUser?'user':'project'}-cell-${index}-${indexC}`} column={column} item={item} />))}
                         <td className="flex justify-end g ap-2 p-4">
                             
                             <Link href={`${viewUrl}/${item.id}`} className="text-cyan-600"><ViewIcon /></Link>
