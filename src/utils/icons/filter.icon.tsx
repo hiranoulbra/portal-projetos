@@ -1,3 +1,4 @@
+'use client';
 import { IconProps } from "@/types/IconProps"
 
 type FilterIconProps = {

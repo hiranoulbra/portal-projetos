@@ -1,3 +1,4 @@
+'use client'
 import React from "react"
 import { Cell } from "./cell"
 import { Column } from "./table.types"

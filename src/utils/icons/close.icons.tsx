@@ -1,4 +1,4 @@
-
+'use client';
 import { IconProps } from "@/types/IconProps";
 
 const CloseIcon = ({ className }: IconProps) => (
