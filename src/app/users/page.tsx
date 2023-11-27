@@ -43,7 +43,7 @@ export default async function PrivatePage({ searchParams }: Props) {
                     <h2 className="text-2xl">Usuários</h2>
                     <div className="flex gap-3 items-center">
                         <PrimaryButton href="/users/edit" >Novo usuario</PrimaryButton>
-                        {/*<Filter />*/}
+                  
                     </div>
                 </div>
                 <main className="text-left w-full">
