@@ -221,7 +221,7 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
                 .input('end_date', sql.Date, data.end_date)
                 .input('planned', sql.Int, data.planned)
                 .input('executed', sql.Int, data.executed)
-                .input('status', sql.VarChar, data.status)
+                .input('status', sql.VarChar, data.status||'Não iniciado')
                 .input('budget', sql.Decimal, data.budget)
                 .query(`
                     INSERT INTO dbo.projects (title, description, manager_id, start_date, end_date, planned, executed,budget)

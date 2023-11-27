@@ -18,7 +18,7 @@ export async function GET(request: Request) {
         .query('SELECT project_id,name FROM dbo.files WHERE id = @id');
 
    
-    if (session?.user.role === ROLE.ADMIN) {
+    if (session?.user.role !== ROLE.ADMIN) {
         const result2 = await pool.request()
             .input('id', sql.Int, result.recordset[0].project_id)
             .input('user_id', sql.Int, session?.user.id)
