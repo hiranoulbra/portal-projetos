@@ -73,7 +73,7 @@ export const getProjects = async (searchParams: SearchParamsProjectType) => {
 
 
 export const getEditProject = async (id: number, user?: User): Promise<ProjectType | null> => {
-    console.log({ id, user })
+    
     let project = null;
     if (!user) {
         return null;
@@ -106,7 +106,7 @@ export const getEditProject = async (id: number, user?: User): Promise<ProjectTy
 
 export const getViewProject = async (id: number): Promise<ProjectType | null> => {
     const session = await getServerSession(authOptions);
-    console.log(id);
+
     if (!session?.user || id === 0) {
         return null;
     }
@@ -158,7 +158,7 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
         files = files.filter(file => file.size > 0 && file.size < 1024 * 1024);
 
 
-        console.log(formdata.get('status'));
+     
 
         const FormData = z.object({
             id: z.coerce.number().int(),

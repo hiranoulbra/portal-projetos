@@ -1,5 +1,4 @@
 'use client';
-import { deleteProject } from "@/actions/project.actions";
 import { DeleteDialog } from "@/components/dialogs/delete.dialog.";
 import { DeleteActionType } from "@/types/delete-action.type";
 import DeleteIcon from "@/utils/icons/delete.icon";

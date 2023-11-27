@@ -1,0 +1,1 @@
+export type LockActionType = (prevState: any, formdata: FormData) => Promise<{ message: string; }>

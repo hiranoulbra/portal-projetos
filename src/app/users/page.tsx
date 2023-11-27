@@ -6,7 +6,7 @@ import { PrimaryButton } from "@/components/ui/buttons";
 
 import Pagination from "@/components/pagination";
 import { SearchParamsProjectType } from "@/actions/project.actions";
-import { deleteUser, getUsers } from "@/actions/users.actions";
+import { deleteUser, getUsers, lockOrUnlockUser } from "@/actions/users.actions";
 
 
 const columns =
@@ -50,6 +50,7 @@ export default async function PrivatePage({ searchParams }: Props) {
                     <Table className="bg-white shadow-md p-2" columns={columns} items={items}
                         editUrl="/users/edit"
                         viewUrl="/users/view"
+                        isUser={true}
                         deleteForm=
                         {{
                             title: "Excluir Usuário",

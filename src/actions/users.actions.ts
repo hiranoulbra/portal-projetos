@@ -2,7 +2,7 @@
 import { ROLE } from "@/types/role";
 import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
-import { QueryUserType, addItem, deleteItem, getItem, getItemsCount, getPagedItems, updateItem, verifyIfUserExists } from "@/core/db/db.user";
+import { QueryUserType, addItem, changeUserStatus, deleteItem, getItem, getItemsCount, getPagedItems, updateItem, verifyIfUserExists } from "@/core/db/db.user";
 import { revalidatePath } from "next/cache";
 
 export type SearchParamsUserType = {
@@ -134,6 +134,24 @@ export const addOrUpdateUser = async (prevState: any, formdata: FormData) => {
     } catch (error) {
         return {
             message: 'Ocorreu um erro ao salvar o usuário'
+        };
+    }
+}
+
+export const lockOrUnlockUser = async (prevState: any, formdata: FormData) => {
+    try {
+
+        const id = formdata.get('id');
+        const isLocked = formdata.get('is_locked');
+        await changeUserStatus(parseInt(id as string), isLocked === 'true' ? true : false)
+        revalidatePath('/users');
+        return {
+            message: 'success'
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            message: 'Ocorreu um erro ao bloquear o usuário'
         };
     }
 }

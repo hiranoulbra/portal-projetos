@@ -25,13 +25,17 @@ export const authOptions: NextAuthOptions = {
                     .input('email', sql.VarChar, userName)
                     .query`Select * from dbo.users where email = @email`;
 
+                    
               
                 if (result.recordset.length == 0 || password == null) {
                     return null;
                 }
                 const user = result.recordset[0];
+                if(user.is_blocked){
+                    return null;
+                }
                 const encryptedPassword = user.password;
-            
+                
                 const match = await bcrypt.compare(password.toString(), encryptedPassword);
 
            

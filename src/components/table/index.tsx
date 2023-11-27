@@ -6,6 +6,8 @@ import EditIcon from "@/utils/icons/edit.icon"
 import ViewIcon from "@/utils/icons/view.icons"
 import { DeleteForm } from "@/app/projects/components/delete.form"
 import { DeleteActionType } from "@/types/delete-action.type"
+import { LockActionType } from "@/types/lock-action.type"
+import { LockForm } from "../lock.form"
 
 
 type Props = {
@@ -20,9 +22,10 @@ type Props = {
         text: string
         action: DeleteActionType;
     }
+    isUser?: boolean;
 
 }
-export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl }: Props) => {
+export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl, isUser }: Props) => {
     return (
         <table className={`w-full ${className}`}>
             <thead>
@@ -39,9 +42,11 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl 
                     <tr className="odd:bg-gray-100" key={index}>
                         {columns.map((column, indexC) => (<Cell key={`$cell-${index}-${indexC}`} column={column} item={item} />))}
                         <td className="flex justify-end gap-2 p-4">
+                            {isUser && <LockForm id={item.id} isLocked={item.isLocked} />}
                             <a href={`${viewUrl}/${item.id}`} className="text-cyan-600"><ViewIcon /></a>
                             {item.canEdit && <a href={`${editUrl}?id=${item.id}`} className="text-cyan-900"><EditIcon /></a>}
                             {item.canDelete && <DeleteForm id={item.id} {...deleteForm} />}
+
                         </td>
                     </tr>
                 ))}

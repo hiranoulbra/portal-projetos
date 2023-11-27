@@ -17,7 +17,7 @@ export default async function NewProject({ searchParams: { id } }: EditProjectPr
     const managers = await getManagers();
     const users = await getUsers();
     const project = await getEditProject(id || 0, session?.user);
-    console.log({ project });
+
     if (project === null) {
         return <AccessDenied href="/projects" />
     }

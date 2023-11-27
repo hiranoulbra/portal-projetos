@@ -25,7 +25,7 @@ export const getPagedItems = async (data: QueryUserType): Promise<UserType[]> =>
     let request = pool.request();
 
     const queryText = createQuery(request,
-        `SELECT id,name,email,role
+        `SELECT id,name,email,role,is_blocked as isLocked
             FROM dbo.users
     `)
         .add('name LIKE @search', 'search', data.search ? `%${data.search}%` : null, sql.VarChar)
@@ -155,4 +155,14 @@ export const getUserByRole = async (role?: ROLE) => {
 
     const result = await request.query(queryText);
     return result.recordset.map((user: User) => user);
+}
+
+export const changeUserStatus = async (id: number, isLocked: boolean) => {
+    const pool = await sql.connect(process.env.DB_CONNECTION);
+    await pool.request()
+        .input('id', sql.Int, id)
+        .input('isLocked', sql.Bit, isLocked)
+        .query(`
+            UPDATE dbo.users SET is_blocked = @isLocked WHERE id = @id
+        `);
 }
