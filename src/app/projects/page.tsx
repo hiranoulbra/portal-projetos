@@ -67,7 +67,7 @@ export default async function ProjectPages({ searchParams }: Props) {
                             text: "Deseja realmente excluir este projeto?",
                            
                         }} />
-                    <Pagination totalPages={pages} />
+                    <Pagination totalPages={pages||1} />
 
                 </main>
             </div>

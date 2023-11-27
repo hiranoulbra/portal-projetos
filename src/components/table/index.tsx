@@ -50,6 +50,7 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
                         </td>
                     </tr>
                 ))}
+                {items.length === 0 && <tr><td colSpan={columns.length} className="text-center p-4">Nenhum registro encontrado</td></tr>}
             </tbody>
         </table>
     )
