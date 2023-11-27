@@ -6,6 +6,7 @@ import { ProjectType } from "@/types/project";
 import { Members } from "./components/members";
 import Archive from "./components/archive";
 import { AccessDenied } from "@/components/access-denied";
+import Link from "next/link";
 
 type Props = {
     params: {
@@ -28,9 +29,9 @@ const Page = async ({ params: { id } }: Props) => {
         <div className="flex justify-center flex-wrap">
             <div className="flex xl:w-3/4 flex-wrap">
                 <ul className="flex w-full pt-5 pl-0 pr-0 justify-start">
-                    <li className="mr-5 font-bold "><a href="/">Home</a></li>
+                    <li className="mr-5 font-bold "><Link href="/">Home</Link></li>
                     <li className="mr-5 font-bold">/</li>
-                    <li className="mr-5 font-bold"><a href="/projects">Projetos</a></li>
+                    <li className="mr-5 font-bold"><Link href="/projects">Projetos</Link></li>
                     <li className="mr-5">/</li>
                     <li className="mr-5 text-cyan-900">{project.title}</li>
                 </ul>

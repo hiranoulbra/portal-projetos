@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 type BreadcrumbItem = {
@@ -11,12 +12,12 @@ type BreadcrumbProps = {
 
 export const Breadcrumb = ({ items }: BreadcrumbProps) => {
     return <ul className="flex w-full pt-5 pl-0 pr-0 justify-start">
-        <li className="mr-5 font-bold "><a href="/">Home</a></li>
+        <li className="mr-5 font-bold "><Link href="/">Home</Link></li>
         {items.map((item, index) => {
             if (item.href) {
                 return <React.Fragment key={`breadcrumb-${index}`}>
                     <li className="mr-5">/</li>
-                    <li className="mr-5 font-bold "><a href={item.href}>{item.label}</a></li>
+                    <li className="mr-5 font-bold "><Link href={item.href}>{item.label}</Link></li>
 
                 </React.Fragment>;
             }
