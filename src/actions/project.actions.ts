@@ -224,9 +224,9 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
                 .input('status', sql.VarChar, data.status||'Não iniciado')
                 .input('budget', sql.Decimal, data.budget)
                 .query(`
-                    INSERT INTO dbo.projects (title, description, manager_id, start_date, end_date, planned, executed,budget)
+                    INSERT INTO dbo.projects (title, description, manager_id, start_date, end_date, planned, executed,budget,status)
                     OUTPUT INSERTED.id
-                    VALUES (@title, @description, @manager_id, @start_date, @end_date, @planned, @executed,@budget)
+                    VALUES (@title, @description, @manager_id, @start_date, @end_date, @planned, @executed,@budget,@status)
                 `);
 
             data.id = result.recordset[0].id;

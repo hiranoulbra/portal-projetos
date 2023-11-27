@@ -17,12 +17,12 @@ export async function GET(request: Request) {
         .input('id', sql.Int, id)
         .query('SELECT project_id,name FROM dbo.files WHERE id = @id');
 
-   
+
     if (session?.user.role !== ROLE.ADMIN) {
         const result2 = await pool.request()
             .input('id', sql.Int, result.recordset[0].project_id)
             .input('user_id', sql.Int, session?.user.id)
-            .query('SELECT user_id FROM dbo.project_members WHERE project_id = @id AND user_id = @user_id');
+            .query('SELECT p.id,p.manager_id From dbo.projects as p LEFT JOIN dbo.project_members as pm ON p.id = pm.project_id where project_id = @id AND (pm.user_id = @user_id OR p.manager_id = @user_id)');
         if (result2.recordset.length == 0) {
             return Response.json({ success: false, "message": "Você não tem permissão para acessar esse arquivo" });
         }
