@@ -8,8 +8,8 @@ export type ProjectType = {
     description: string;
     manager_id: number;
     manager_name?: string;
-    start_date: Date;
-    end_date: Date;
+    start_date: string;
+    end_date: string;
     planned: number;
     executed: number;
     status: string;

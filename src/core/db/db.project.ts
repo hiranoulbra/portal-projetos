@@ -2,6 +2,7 @@ import { DateRange } from '@/components/fields/field.date-range';
 import { ProjectType } from '@/types/project';
 import { endOfDay, startOfDay } from '@/utils/date.helper';
 import { createQuery as createQuery } from '@/utils/sql.helper';
+import dayjs from 'dayjs';
 import sql, { ISqlType, query } from 'mssql';
 
 export type SortType = {
@@ -45,7 +46,13 @@ export const getPagedItems = async (data: QueryProjectType, isAdmin: boolean): P
 
     const result = await request.query(queryText);
 
-    return result.recordset as ProjectType[];
+    return result.recordset.map((p) => {
+        return {
+            ...p,
+            start_date: p.start_date ? dayjs(p.start_date).format('DD/MM/YYYY') : '',
+            end_date: p.end_date ? dayjs(p.end_date).format('DD/MM/YYYY') : ''
+        };
+    }) as ProjectType[];
 
 }
 
