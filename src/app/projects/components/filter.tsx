@@ -29,7 +29,7 @@ export const Filter: React.FC<{}> = () => {
         setShow(false);
     }
 
-    const onShow = () => {
+    useEffect(() => {
         const q = searchParams.get('q');
         const sd = searchParams.get('sd');
         const ed = searchParams.get('ed');
@@ -60,9 +60,8 @@ export const Filter: React.FC<{}> = () => {
         } else {
             setHasfilter(false);
         }
-        setShow(true)
 
-    };
+    }, [searchParams])
 
 
     const onApply = () => {
@@ -87,7 +86,7 @@ export const Filter: React.FC<{}> = () => {
 
 
     return <React.Fragment>
-        <PrimaryButton onClick={onShow}><FilterIcon active={hasfilter} /></PrimaryButton>
+        <PrimaryButton onClick={() => setShow(true)}><FilterIcon active={hasfilter} /></PrimaryButton>
         {show && <Panel className="max-w-sm flex flex-col justify-between h-full" >
 
             <div className="flex w-full flex-wrap flex-col">
