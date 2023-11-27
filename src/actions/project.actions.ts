@@ -192,6 +192,7 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
             status: formdata.get('status')
         });
 
+        console.log({data});
         const pool = await sql.connect(process.env.DB_CONNECTION);
         if (data.id > 0) {
             const result = await pool.request()
@@ -221,7 +222,7 @@ export const submitProject = async (prevState: any, formdata: FormData) => {
                 .input('planned', sql.Int, data.planned)
                 .input('executed', sql.Int, data.executed)
                 .input('status', sql.VarChar, data.status)
-                .input('budget', sql.VarChar, data.budget)
+                .input('budget', sql.Decimal, data.budget)
                 .query(`
                     INSERT INTO dbo.projects (title, description, manager_id, start_date, end_date, planned, executed,budget)
                     OUTPUT INSERTED.id
