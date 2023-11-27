@@ -54,7 +54,7 @@ export default async function PrivatePage({ searchParams }: Props) {
                     <h2 className="text-2xl">Projetos</h2>
                     <div className="flex gap-3 items-center">
                         {(session?.user.role === ROLE.ADMIN || session?.user.role === ROLE.MANAGER) && <PrimaryButton href="/projects/edit" >Novo projeto</PrimaryButton>}
-                        <Filter />
+                        <Filter suppressHydrationWarning={true}/>
                     </div>
                 </div>
                 <main className="text-left w-full">
