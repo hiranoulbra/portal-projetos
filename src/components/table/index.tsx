@@ -6,9 +6,9 @@ import { ColHeader } from "./col-header"
 import EditIcon from "@/utils/icons/edit.icon"
 import ViewIcon from "@/utils/icons/view.icons"
 import { DeleteForm } from "@/app/projects/components/delete.form"
-import { DeleteActionType } from "@/types/delete-action.type"
-import { LockActionType } from "@/types/lock-action.type"
-import { LockForm } from "../lock.form"
+
+//import { LockActionType } from "@/types/lock-action.type"
+//import { LockForm } from "../lock.form"
 import Link from "next/link"
 
 
@@ -44,7 +44,7 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
                     <tr className="odd:bg-gray-100" key={index}>
                         {columns.map((column, indexC) => (<Cell key={`$cell-${index}-${indexC}`} column={column} item={item} />))}
                         <td className="flex justify-end g ap-2 p-4">
-                            {isUser && <LockForm id={item.id} isLocked={item.isLocked} />}
+                            
                             <Link href={`${viewUrl}/${item.id}`} className="text-cyan-600"><ViewIcon /></Link>
                             {item.canEdit && <Link href={`${editUrl}?id=${item.id}`} className="text-cyan-900"><EditIcon /></Link>}
                             {item.canDelete && <DeleteForm  id={item.id} {...deleteForm} isUser={isUser}/>}
@@ -56,3 +56,4 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
         </table>
     )
 }
+//{isUser && <LockForm id={item.id} isLocked={item.isLocked} />}
