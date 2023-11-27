@@ -42,7 +42,7 @@ export const Table = ({ columns, items, className, deleteForm, editUrl, viewUrl,
                 {items.map((item, index) => (
                     <tr className="odd:bg-gray-100" key={index}>
                         {columns.map((column, indexC) => (<Cell key={`$cell-${index}-${indexC}`} column={column} item={item} />))}
-                        <td className="flex justify-end gap-2 p-4">
+                        <td className="flex justify-end g ap-2 p-4">
                             {isUser && <LockForm id={item.id} isLocked={item.isLocked} />}
                             <Link href={`${viewUrl}/${item.id}`} className="text-cyan-600"><ViewIcon /></Link>
                             {item.canEdit && <Link href={`${editUrl}?id=${item.id}`} className="text-cyan-900"><EditIcon /></Link>}
