@@ -20,8 +20,8 @@ const Info = ({ project }: Props) => {
         <FieldTextArea disabled={true} groupProps={{ className: "w-full" }} defaultValue={project?.description} name="description" type="text" label={"Descrição"} />
         <FieldText disabled={true} defaultValue={project?.status} name="status" required type="text" label={"Status"} groupProps={{ className: "w-full" }} />
         <FieldText disabled={true} defaultValue={project?.manager_name} name="managerName" required type="text" label={"Gestor"} groupProps={{ className: "w-full" }} />
-        <FieldText disabled={true} defaultValue={formatDate(project?.start_date)} name="start_date" required type="date" label={"Data de Inicio"} groupProps={groupProps} />
-        <FieldText disabled={true} defaultValue={formatDate(project?.end_date)} name="end_date" required type="date" label={"Data Final"} groupProps={groupProps} />
+        <FieldText disabled={true} defaultValue={project?.start_date} name="start_date" required type="date" label={"Data de Inicio"} groupProps={groupProps} />
+        <FieldText disabled={true} defaultValue={project?.end_date} name="end_date" required type="date" label={"Data Final"} groupProps={groupProps} />
         <FieldText disabled={true} defaultValue={project?.planned} name="planned" min={0} max={100} type="number" label={"Previsto"} groupProps={groupProps} />
         <FieldText disabled={true} defaultValue={project?.executed} name="executed" min={0} max={100} type="number" label={"Executado"} groupProps={groupProps} />
         {(project.budget > 0) && <FieldText disabled={true} groupProps={{ className: "w-full" }} defaultValue={project.budget.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} label={"Orçamento"} className="w-full" />}

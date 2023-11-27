@@ -3,7 +3,7 @@ import { FieldSelect } from "@/components/fields/field.select";
 import { FieldText } from "@/components/fields/field.text";
 import { FieldTextArea } from "@/components/fields/field.textarea";
 import { ProjectType } from "@/types/project";
-import { formatDate } from "@/utils/format.date";
+
 import { User } from "next-auth";
 
 const groupProps = {
@@ -33,8 +33,8 @@ const Info = ({ project, managers,isManager }: Props) => {
             <option value="Cancelado">Cancelado</option>
 
         </FieldSelect>
-        <FieldText defaultValue={formatDate(project?.start_date)} name="start_date" required type="date" label={"Data de Inicio"} groupProps={groupProps} />
-        <FieldText defaultValue={formatDate(project?.end_date)} name="end_date" required type="date" label={"Data Final"} groupProps={groupProps} />
+        <FieldText defaultValue={project?.start_date} name="start_date" required type="date" label={"Data de Inicio"} groupProps={groupProps} />
+        <FieldText defaultValue={project?.end_date} name="end_date" required type="date" label={"Data Final"} groupProps={groupProps} />
         <FieldText defaultValue={project?.planned} name="planned" min={0} max={100} type="number" label={"Previsto"} groupProps={groupProps} />
         <FieldText defaultValue={project?.executed} name="executed" min={0} max={100} type="number" label={"Executado"} groupProps={groupProps} />
         <FieldText groupProps={{ className: "w-full" }} defaultValue={project?.budget} type="number" required={true} name="budget" label={"Orçamento"} className="w-full" />

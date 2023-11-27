@@ -93,10 +93,14 @@ export const getItemByIdAndUser = async (id: number, userId: number, isAdmin: bo
 
     const result = await request.query(queryText);
 
+    
     if (result.recordset.length === 0) {
         return null;
     }
-    return result.recordset[0] as ProjectType;
+    return {...result.recordset[0],
+        start_date: result.recordset[0].start_date ? dayjs(result.recordset[0].start_date).format('YYYY-MM-DD') : '',
+        end_date: result.recordset[0].end_date ? dayjs(result.recordset[0].end_date).format('YYYY-MM-DD')  : ''
+    }as ProjectType;
 }
 
 export const getItemById = async (id: number): Promise<ProjectType | null> => {
@@ -114,7 +118,12 @@ export const getItemById = async (id: number): Promise<ProjectType | null> => {
     if (result.recordset.length === 0) {
         return null;
     }
-    return result.recordset[0] as ProjectType;
+    return {
+        ...result.recordset[0],
+        start_date: result.recordset[0].start_date ? dayjs(result.recordset[0].start_date).format('YYYY-MM-DD') : '',
+        end_date: result.recordset[0].end_date ? dayjs(result.recordset[0].end_date).format('YYYY-MM-DD')  : ''
+        
+    }as ProjectType;
 }
 
 export const getItemsByYear = async (year: number): Promise<ProjectType[]> => {
