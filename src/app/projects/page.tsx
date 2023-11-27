@@ -48,13 +48,13 @@ export default async function PrivatePage({ searchParams }: Props) {
         <>
             <Breadcrumb items={[{ label: "Projetos" }]} />
 
-            <div className="flex w-full flex-wrap">
+            <div suppressHydrationWarning={true} className="flex w-full flex-wrap">
 
                 <div className="flex w-full justify-between mt-4 mb-4 items-center">
                     <h2 className="text-2xl">Projetos</h2>
                     <div className="flex gap-3 items-center">
                         {(session?.user.role === ROLE.ADMIN || session?.user.role === ROLE.MANAGER) && <PrimaryButton href="/projects/edit" >Novo projeto</PrimaryButton>}
-                        <Filter suppressHydrationWarning={true}/>
+                        <Filter />
                     </div>
                 </div>
                 <main className="text-left w-full">
