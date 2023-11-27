@@ -3,7 +3,7 @@ import { Table } from "@/components/table";
 
 import { Breadcrumb } from "@/components/breadcrumb";
 import { PrimaryButton } from "@/components/ui/buttons";
-import { Filter } from "./components/filter";
+//import { Filter } from "./components/filter";
 import Pagination from "@/components/pagination";
 import { SearchParamsProjectType, deleteProject, getProjects } from "@/actions/project.actions";
 import { authOptions } from "@/utils/authOptions";
@@ -54,7 +54,7 @@ export default async function PrivatePage({ searchParams }: Props) {
                     <h2 className="text-2xl">Projetos</h2>
                     <div className="flex gap-3 items-center">
                         {(session?.user.role === ROLE.ADMIN || session?.user.role === ROLE.MANAGER) && <PrimaryButton href="/projects/edit" >Novo projeto</PrimaryButton>}
-                        <Filter />
+                        {/*<Filter />*/}
                     </div>
                 </div>
                 <main className="text-left w-full">
